@@ -5,8 +5,13 @@ import Search from "@/app/ui/search";
 import Table from "@/app/ui/invoices/table";
 import { CreateInvoice } from "@/app/ui/invoices/buttons";
 import { lusitana } from "@/app/ui/fonts";
-import { fetchInvoicesPages } from '@/app/lib/data';
+import { fetchInvoicesPages } from "@/app/lib/data";
 import { InvoicesTableSkeleton } from "@/app/ui/skeletons";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Invoices',
+};
 
 export default async function Page(props: {
   searchParams?: Promise<{
@@ -28,7 +33,7 @@ export default async function Page(props: {
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">
